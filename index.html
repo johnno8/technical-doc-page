@@ -107,7 +107,7 @@
           <li>
             <a class="nav-link" href="#One_To_Many_associations">
               <div class="link-item">
-                <p>One_To_Many_associations</p>
+                <p>One To Many associations</p>
               </div>
             </a>
           </li>
@@ -120,7 +120,18 @@
           </header>
           <article>
             <p>Sequelize is a powerful Javascript library built on Node.js, which makes the developer's life easier by helping to manage SQL databases.</p>
-            <p>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite or PostgreSQL databases by mapping database entries to objects and vice versa. It has a very powerful migrations mechanism that can transform an existing database schema into a new version. It also provides database synchronization mechanisms that can create a database structure by specifying the model structure.</p>
+            <!-- <p>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite or PostgreSQL databases by mapping database entries to objects and vice versa. It has a very powerful migrations mechanism that can transform an existing database schema into a new version. It also provides database synchronization mechanisms that can create a database structure by specifying the model structure.</p> -->
+            <ul>
+              <li>
+                <p>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite or PostgreSQL databases by mapping database entries to objects and vice versa</p>
+              </li>
+              <li>
+                <p>It has a very powerful migrations mechanism that can transform an existing database schema into a new version</p>
+              </li>
+              <li>
+                <p>It also provides database synchronization mechanisms that can create a database structure by specifying the model structure</p>
+              </li>
+            </ul>
           </article>
         </section>
         <section class="main-section" id="Installation">
@@ -128,6 +139,7 @@
             <h2>Installation</h2>
           </header>
           <article>
+            <p>Sequelize is available via NPM and Yarn.</p>
             <pre>
               <code><span class="comment">// Using NPM</span>
 $ npm install --save sequelize
@@ -136,7 +148,7 @@ $ npm install --save sequelize
 $ npm install --save pg pg-hstore
 $ npm install --save mysql2
 $ npm install --save sqlite3
-$ npm install --save tedious // MSSQL
+$ npm install --save tedious <span class="comment">// MSSQL</span>
 
 <span class="comment">// Using Yarn</span>
 $ yarn add sequelize
@@ -145,7 +157,7 @@ $ yarn add sequelize
 $ yarn add pg pg-hstore
 $ yarn add mysql2
 $ yarn add sqlite3
-$ yarn add tedious // MSSQL</code>
+$ yarn add tedious <span class="comment">// MSSQL</code></span>
             </pre>
           </article>
         </section>
@@ -154,7 +166,29 @@ $ yarn add tedious // MSSQL</code>
             <h2>Setting up a connection</h2>
           </header>
           <article>
-            
+            <p>Sequelize will setup a connection pool on initialization so you should ideally only ever create one instance per database if you're connecting to the DB from a single process. If you're connecting to the DB from multiple processes, you'll have to create one instance per process, but each instance should have a maximum connection pool size of "max connection pool size divided by number of instances". So, if you wanted a max connection pool size of 90 and you had 3 worker processes, each process's instance should have a max connection pool size of 30.</p>
+            <pre>
+              <code>const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  host: 'localhost',
+  dialect: 'mysql'|'sqlite'|'postgres'|'mssql',
+  operatorsAliases: false,
+
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 30000,
+    idle: 10000
+  },
+
+  <span class="comment">// SQLite only</span>
+  storage: 'path/to/database.sqlite'
+});
+
+<span class="comment">// Or you can simply use a connection uri</span>
+const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');</code>
+            </pre>
+            <p>The Sequelize constructor takes a whole slew of options that are available via the API reference.</p>
           </article>
         </section>
         <section class="main-section" id="Test_the_connection">
@@ -162,7 +196,17 @@ $ yarn add tedious // MSSQL</code>
             <h2>Test the connection</h2>
           </header>
           <article>
-            
+            <p>You can use the <span class="inline-code">.authenticate()</span> function like this to test the connection.</p>
+            <pre>
+              <code>sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });</code>
+            </pre>
           </article>
         </section>
         <section class="main-section" id="Your_first_model">
@@ -170,7 +214,26 @@ $ yarn add tedious // MSSQL</code>
             <h2>Your first model</h2>
           </header>
           <article>
-            
+            <p>Models are defined with <span class="inline-code">sequelize.define('name', {attributes}, {options})</span>.</p>
+            <pre>
+              <code>const User = sequelize.define('user', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  }
+});
+
+<span class="comment">// force: true will drop the table if it already exists</span>
+User.sync({force: true}).then(() => {
+  <span class="comment">// Table created</span>
+  return User.create({
+    firstName: 'John',
+    lastName: 'Hancock'
+  });
+});</code>
+            </pre>
           </article>
         </section>
         <section class="main-section" id="Your_first_query">
@@ -178,7 +241,12 @@ $ yarn add tedious // MSSQL</code>
             <h2>Your first query</h2>
           </header>
           <article>
-            
+            <pre>
+              <code>User.findAll().then(users => {
+  console.log(users)
+})</code>
+            </pre>
+            <p>This returns all user records; the matched records can refined with specific queries like <span class="inline-code">where</span></p>
           </article>
         </section>
         <section class="main-section" id="Promises">
@@ -194,7 +262,31 @@ $ yarn add tedious // MSSQL</code>
             <h2>Basic usage</h2>
           </header>
           <article>
-            
+            <p>Sequelize uses <a href="bluebirdjs.com">Bluebird</a> promises to control async control-flow.</p>
+            <ul>
+              <li>
+                <p>If you are unfamiliar with how promises work, don't worry, you can read up on them <a href="http://bluebirdjs.com/docs/why-promises.html">here</a>.</p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <p>Basically, a promise represents a value which will be present at some point - "I promise you I will give you a result or an error at some point".</p>
+              </li>
+            </ul>
+            <p>This means that the following will never work:</p>
+            <pre>
+              <code><span class="comment">// DON'T DO THIS</span>
+user = User.findOne()
+
+console.log(user.get('firstName'));</code>
+            </pre>
+            <p>This is because user is a promise object, not a data row from the DB. The right way to do it is:</p>
+            <pre>
+              <code>User.findOne().then(user => {
+  console.log(user.get('firstName'));
+});</code>
+            </pre>
+            <p>Once you've got the hang of what promises are and how they work, use the <a href="http://bluebirdjs.com/docs/api-reference.html">bluebird API reference</a> as your go-to tool.</p>
           </article>
         </section>
         <section class="main-section" id="Options">
