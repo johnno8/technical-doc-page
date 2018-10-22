@@ -28,7 +28,7 @@ nav {
 }
 
 nav header {
-  background: LightSkyBlue;
+  background-color: rgb(3, 155, 229);
   height: auto;
   width: 100%;
   text-align: center;
@@ -53,10 +53,11 @@ nav li {
 .link-item {
   height: 40px;
   width: 95%;
-  background-color: rgb(3, 155, 229);
+  background: #6eb5f7;
   color: white;
   text-align: center;
   font-weight: bold;
+  border-radius: 0.1em;
 }
 
 .link-item p {
