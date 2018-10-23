@@ -97,7 +97,7 @@
               </div>
             </a>
           </li>
-          <li>
+          <!-- <li>
             <a class="nav-link" href="#One_To_One_associations">
               <div class="link-item">
                 <p>One To One associations</p>
@@ -110,7 +110,7 @@
                 <p>One To Many associations</p>
               </div>
             </a>
-          </li>
+          </li> -->
         </ul>
       </nav>
       <main id="main-doc">
@@ -140,7 +140,7 @@
           </header>
           <article>
             <p>Sequelize is available via NPM and Yarn.</p>
-            <pre>
+            <!-- <pre> -->
               <code><span class="comment">// Using NPM</span>
 $ npm install --save sequelize
 
@@ -158,7 +158,7 @@ $ yarn add pg pg-hstore
 $ yarn add mysql2
 $ yarn add sqlite3
 $ yarn add tedious <span class="comment">// MSSQL</code></span>
-            </pre>
+            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Setting_up_a_connection">
@@ -167,7 +167,7 @@ $ yarn add tedious <span class="comment">// MSSQL</code></span>
           </header>
           <article>
             <p>Sequelize will setup a connection pool on initialization so you should ideally only ever create one instance per database if you're connecting to the DB from a single process. If you're connecting to the DB from multiple processes, you'll have to create one instance per process, but each instance should have a maximum connection pool size of "max connection pool size divided by number of instances". So, if you wanted a max connection pool size of 90 and you had 3 worker processes, each process's instance should have a max connection pool size of 30.</p>
-            <pre>
+            <!-- <pre> -->
               <code>const Sequelize = require('sequelize');
 const sequelize = new Sequelize('database', 'username', 'password', {
   host: 'localhost',
@@ -187,7 +187,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 
 <span class="comment">// Or you can simply use a connection uri</span>
 const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');</code>
-            </pre>
+            <!-- </pre> -->
             <p>The Sequelize constructor takes a whole slew of options that are available via the API reference.</p>
           </article>
         </section>
@@ -197,7 +197,7 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
           </header>
           <article>
             <p>You can use the <span class="inline-code">.authenticate()</span> function like this to test the connection.</p>
-            <pre>
+            <!-- <pre> -->
               <code>sequelize
   .authenticate()
   .then(() => {
@@ -206,7 +206,7 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });</code>
-            </pre>
+            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Your_first_model">
@@ -215,7 +215,7 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
           </header>
           <article>
             <p>Models are defined with <span class="inline-code">sequelize.define('name', {attributes}, {options})</span>.</p>
-            <pre>
+            <!-- <pre> -->
               <code>const User = sequelize.define('user', {
   firstName: {
     type: Sequelize.STRING
@@ -233,7 +233,7 @@ User.sync({force: true}).then(() => {
     lastName: 'Hancock'
   });
 });</code>
-            </pre>
+            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Your_first_query">
@@ -241,25 +241,17 @@ User.sync({force: true}).then(() => {
             <h2>Your first query</h2>
           </header>
           <article>
-            <pre>
+            <!-- <pre> -->
               <code>User.findAll().then(users => {
   console.log(users)
 })</code>
-            </pre>
+            <!-- </pre> -->
             <p>This returns all user records; the matched records can refined with specific queries like <span class="inline-code">where</span></p>
           </article>
         </section>
         <section class="main-section" id="Promises">
           <header>
             <h2>Promises</h2>
-          </header>
-          <article>
-            
-          </article>
-        </section>
-        <section class="main-section" id="Basic_usage">
-          <header>
-            <h2>Basic usage</h2>
           </header>
           <article>
             <p>Sequelize uses <a href="bluebirdjs.com">Bluebird</a> promises to control async control-flow.</p>
@@ -274,19 +266,56 @@ User.sync({force: true}).then(() => {
               </li>
             </ul>
             <p>This means that the following will never work:</p>
-            <pre>
+            <!-- <pre> -->
               <code><span class="comment">// DON'T DO THIS</span>
 user = User.findOne()
 
 console.log(user.get('firstName'));</code>
-            </pre>
+            <!-- </pre> -->
             <p>This is because user is a promise object, not a data row from the DB. The right way to do it is:</p>
-            <pre>
+            <!-- <pre> -->
               <code>User.findOne().then(user => {
   console.log(user.get('firstName'));
 });</code>
-            </pre>
+            <!-- </pre> -->
             <p>Once you've got the hang of what promises are and how they work, use the <a href="http://bluebirdjs.com/docs/api-reference.html">bluebird API reference</a> as your go-to tool.</p>
+          </article>
+        </section>
+        <section class="main-section" id="Basic_usage">
+          <header>
+            <h2>Basic usage</h2>
+          </header>
+          <article>
+            <p>To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:</p>
+            <!-- <pre> -->
+              <code>const sequelize = new Sequelize('database', 'username', 'password', {
+  dialect: 'mysql'
+});</code>
+            <!-- </pre> -->
+            <p>This will save the passed database credentials and provide all further methods.</p>
+            <p>Furthermore you can specify a non-default host/port:</p>
+            <!-- <pre> -->
+              <code>const sequelize = new Sequelize('database', 'username', 'password', {
+  dialect: 'mysql',
+  host: "my.server.tld",
+  port: 9821,
+})</code>
+            <!-- </pre> -->
+            <p>If you just don't have a password:</p>
+            <!-- <pre> -->
+              <code>const sequelize = new Sequelize({
+  database: 'db_name',
+  username: 'username',
+  password: null,
+  dialect: 'mysql'
+});</code>
+            <!-- </pre> -->
+            <p>You can also use a connection string:</p>
+            <!-- <pre> -->
+              <code>const sequelize = new Sequelize('mysql://user:pass@example.com:9821/db_name', {
+  <span class="comment">// Look to the next section for possible options</span>
+})</code>
+            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Options">
@@ -294,7 +323,83 @@ console.log(user.get('firstName'));</code>
             <h2>Options</h2>
           </header>
           <article>
-            
+            <p>Besides the host and the port, Sequelize comes with a whole bunch of options. Here they are:</p>
+            <ul>
+              <li>See <a href="http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html">Sequelize API</a></li>
+              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#configuration">Model Definition</a></li>
+              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/transactions.html">Transactions</a></li>
+            </ul>
+            <code>const sequelize = new Sequelize('database', 'username', 'password', {
+  <span class="comment">// the sql dialect of the database</span>
+  <span class="comment">// currently supported: 'mysql', 'sqlite', 'postgres', 'mssql'</span>
+  dialect: 'mysql',
+
+  <span class="comment">// custom host; default: localhost</span>
+  host: 'my.server.tld',
+
+  <span class="comment">// custom port; default: dialect default</span>
+  port: 12345,
+
+  <span class="comment">// custom protocol; default: 'tcp'</span>
+  <span class="comment">// postgres only, useful for Heroku</span>
+  protocol: null,
+
+  <span class="comment">// disable logging; default: console.log</span>
+  logging: false,
+
+  <span class="comment">// you can also pass any dialect options to the underlying dialect library</span>
+  <span class="comment">// - default is empty</span>
+  <span class="comment">// - currently supported: 'mysql', 'postgres', 'mssql'</span>
+  dialectOptions: {
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock',
+    supportBigNumbers: true,
+    bigNumberStrings: true
+  },
+
+  <span class="comment">// the storage engine for sqlite</span>
+  <span class="comment">// - default ':memory:'</span>
+  storage: 'path/to/database.sqlite',
+
+  <span class="comment">// disable inserting undefined values as NULL</span>
+  <span class="comment">// - default: false</span>
+  omitNull: true,
+
+  <span class="comment">// a flag for using a native library or not.</span>
+  <span class="comment">// in the case of 'pg' -- set this to true will allow SSL support</span>
+  <span class="comment">// - default: false</span>
+  native: true,
+
+  <span class="comment">// Specify options, which are used when sequelize.define is called.</span>
+  <span class="comment">// The following example:</span>
+  <span class="comment">//   define: { timestamps: false }</span>
+  <span class="comment">// is basically the same as:</span>
+  <span class="comment">//   sequelize.define(name, attributes, { timestamps: false })</span>
+  <span class="comment">// so defining the timestamps for each model will be not necessary</span>
+  define: {
+    underscored: false
+    freezeTableName: false,
+    charset: 'utf8',
+    dialectOptions: {
+      collate: 'utf8_general_ci'
+    },
+    timestamps: true
+  },
+
+  <span class="comment">// similar for sync: you can define this to always force sync for models</span>
+  sync: { force: true },
+
+  <span class="comment">// pool configuration used to pool database connections</span>
+  pool: {
+    max: 5,
+    idle: 30000,
+    acquire: 60000,
+  },
+
+  <span class="comment">// isolation level of each transaction</span>
+  <span class="comment">// defaults to dialect default</span>
+  isolationLevel: Transaction.ISOLATION_LEVELS.REPEATABLE_READ
+})</code>
+            <p>You can also define a custom function for the logging part. Just pass a function. The first parameter will be the string that is logged.</p>
           </article>
         </section>
         <section class="main-section" id="Model_definition">
@@ -302,7 +407,17 @@ console.log(user.get('firstName'));</code>
             <h2>Model definition</h2>
           </header>
           <article>
-            
+            <p>To define mappings between a model and a table, use the <span class="inline-code">define</span> method.</p>
+            <code>const Project = sequelize.define('project', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT
+})
+
+const Task = sequelize.define('task', {
+  title: Sequelize.STRING,
+  description: Sequelize.TEXT,
+  deadline: Sequelize.DATE
+})</code>
           </article>
         </section>
         <section class="main-section" id="Data_retrieval">
@@ -310,7 +425,27 @@ console.log(user.get('firstName'));</code>
             <h2>Data retrieval</h2>
           </header>
           <article>
-            
+            <p>Finder methods are intended to query data from the database. They do not return plain objects but instead return model instances. Because finder methods return model instances you can call any model instance member on the result as described in the documentation for <span class="inline-code">instances</span>.</p>
+            <p>Examples of finder methods:</p>
+            <code><span class="comment">// search for known ids</span>
+Project.findById(123).then(project => {
+  <span class="comment">// project will be an instance of Project and stores the content of the table entry</span>
+  <span class="comment">// with id 123. if such an entry is not defined you will get null</span>
+})
+
+<span class="comment">// search for attributes</span>
+Project.findOne({ where: {title: 'aProject'} }).then(project => {
+  <span class="comment">// project will be the first entry of the Projects table with the title 'aProject' || null</span>
+})
+
+
+Project.findOne({
+  where: {title: 'aProject'},
+  attributes: ['id', ['name', 'title']]
+}).then(project => {
+  <span class="comment">// project will be the first entry of the Projects table with the title 'aProject' || null</span>
+  <span class="comment">// project.title will contain the name of the project</span>
+})</code>
           </article>
         </section>
         <section class="main-section" id="Querying">
@@ -318,10 +453,66 @@ console.log(user.get('firstName'));</code>
             <h2>Querying</h2>
           </header>
           <article>
-            
+            <p>Whether you are querying with findAll/find or doing bulk updates/destroys you can pass a <span class="inline-code">where</span> object to filter the query.</p>
+            <p>Examples:</p>
+            <code>const Op = Sequelize.Op;
+
+Post.findAll({
+  where: {
+    authorId: 2
+  }
+});
+<span class="comment">// SELECT * FROM post WHERE authorId = 2</span>
+
+Post.findAll({
+  where: {
+    authorId: 12,
+    status: 'active'
+  }
+});
+<span class="comment">// SELECT * FROM post WHERE authorId = 12 AND status = 'active';</span>
+
+Post.findAll({
+  where: {
+    [Op.or]: [{authorId: 12}, {authorId: 13}]
+  }
+});
+<span class="comment">// SELECT * FROM post WHERE authorId = 12 OR authorId = 13;</span>
+
+Post.findAll({
+  where: {
+    authorId: {
+      [Op.or]: [12, 13]
+    }
+  }
+});
+<span class="comment">// SELECT * FROM post WHERE authorId = 12 OR authorId = 13;</span>
+
+Post.destroy({
+  where: {
+    status: 'inactive'
+  }
+});
+<span class="comment">// DELETE FROM post WHERE status = 'inactive';</span>
+
+Post.update({
+  updatedAt: null,
+}, {
+  where: {
+    deletedAt: {
+      [Op.ne]: null
+    }
+  }
+});
+<span class="comment">// UPDATE post SET updatedAt = null WHERE deletedAt NOT NULL;</span>
+
+Post.findAll({
+  where: sequelize.where(sequelize.fn('char_length', sequelize.col('status')), 6)
+});
+<span class="comment">// SELECT * FROM post WHERE char_length(status) = 6;</span></code>
           </article>
         </section>
-        <section class="main-section" id="One_To_One_associations">
+        <!-- <section class="main-section" id="One_To_One_associations">
           <header>
             <h2>One To One associations</h2>
           </header>
@@ -336,7 +527,7 @@ console.log(user.get('firstName'));</code>
           <article>
             
           </article>
-        </section>
+        </section> -->
       </main>
   	</div>
   </body>
