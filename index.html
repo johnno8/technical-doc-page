@@ -10,7 +10,10 @@
   	<div class="container">
   		<nav id="navbar">
         <header>
-          <h3>Sequelize Documentation</h3>
+          <div class="header-img-div">
+          <a href="#v1"><img id="header-img" src="http://docs.sequelizejs.com/manual/asset/logo-small.png"></a>
+        </div>
+          <h3>Sequelize</h3>
         </header>
         <ul>
           <li>
@@ -97,20 +100,6 @@
               </div>
             </a>
           </li>
-          <!-- <li>
-            <a class="nav-link" href="#One_To_One_associations">
-              <div class="link-item">
-                <p>One To One associations</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a class="nav-link" href="#One_To_Many_associations">
-              <div class="link-item">
-                <p>One To Many associations</p>
-              </div>
-            </a>
-          </li> -->
         </ul>
       </nav>
       <main id="main-doc">
@@ -120,7 +109,6 @@
           </header>
           <article>
             <p>Sequelize is a powerful Javascript library built on Node.js, which makes the developer's life easier by helping to manage SQL databases.</p>
-            <!-- <p>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite or PostgreSQL databases by mapping database entries to objects and vice versa. It has a very powerful migrations mechanism that can transform an existing database schema into a new version. It also provides database synchronization mechanisms that can create a database structure by specifying the model structure.</p> -->
             <ul>
               <li>
                 <p>Sequelize.js is an ORM (Object/Relational Mapper) which provides easy access to MySQL, MariaDB, SQLite or PostgreSQL databases by mapping database entries to objects and vice versa</p>
@@ -140,7 +128,6 @@
           </header>
           <article>
             <p>Sequelize is available via NPM and Yarn.</p>
-            <!-- <pre> -->
               <code><span class="comment">// Using NPM</span>
 $ npm install --save sequelize
 
@@ -158,7 +145,6 @@ $ yarn add pg pg-hstore
 $ yarn add mysql2
 $ yarn add sqlite3
 $ yarn add tedious <span class="comment">// MSSQL</code></span>
-            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Setting_up_a_connection">
@@ -167,7 +153,6 @@ $ yarn add tedious <span class="comment">// MSSQL</code></span>
           </header>
           <article>
             <p>Sequelize will setup a connection pool on initialization so you should ideally only ever create one instance per database if you're connecting to the DB from a single process. If you're connecting to the DB from multiple processes, you'll have to create one instance per process, but each instance should have a maximum connection pool size of "max connection pool size divided by number of instances". So, if you wanted a max connection pool size of 90 and you had 3 worker processes, each process's instance should have a max connection pool size of 30.</p>
-            <!-- <pre> -->
               <code>const Sequelize = require('sequelize');
 const sequelize = new Sequelize('database', 'username', 'password', {
   host: 'localhost',
@@ -187,7 +172,6 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 
 <span class="comment">// Or you can simply use a connection uri</span>
 const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');</code>
-            <!-- </pre> -->
             <p>The Sequelize constructor takes a whole slew of options that are available via the API reference.</p>
           </article>
         </section>
@@ -197,7 +181,6 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
           </header>
           <article>
             <p>You can use the <span class="inline-code">.authenticate()</span> function like this to test the connection.</p>
-            <!-- <pre> -->
               <code>sequelize
   .authenticate()
   .then(() => {
@@ -206,7 +189,6 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
   .catch(err => {
     console.error('Unable to connect to the database:', err);
   });</code>
-            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Your_first_model">
@@ -215,7 +197,6 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
           </header>
           <article>
             <p>Models are defined with <span class="inline-code">sequelize.define('name', {attributes}, {options})</span>.</p>
-            <!-- <pre> -->
               <code>const User = sequelize.define('user', {
   firstName: {
     type: Sequelize.STRING
@@ -233,7 +214,6 @@ User.sync({force: true}).then(() => {
     lastName: 'Hancock'
   });
 });</code>
-            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Your_first_query">
@@ -241,11 +221,9 @@ User.sync({force: true}).then(() => {
             <h2>Your first query</h2>
           </header>
           <article>
-            <!-- <pre> -->
               <code>User.findAll().then(users => {
   console.log(users)
 })</code>
-            <!-- </pre> -->
             <p>This returns all user records; the matched records can refined with specific queries like <span class="inline-code">where</span></p>
           </article>
         </section>
@@ -266,18 +244,14 @@ User.sync({force: true}).then(() => {
               </li>
             </ul>
             <p>This means that the following will never work:</p>
-            <!-- <pre> -->
               <code><span class="comment">// DON'T DO THIS</span>
 user = User.findOne()
 
 console.log(user.get('firstName'));</code>
-            <!-- </pre> -->
             <p>This is because user is a promise object, not a data row from the DB. The right way to do it is:</p>
-            <!-- <pre> -->
               <code>User.findOne().then(user => {
   console.log(user.get('firstName'));
 });</code>
-            <!-- </pre> -->
             <p>Once you've got the hang of what promises are and how they work, use the <a href="http://bluebirdjs.com/docs/api-reference.html">bluebird API reference</a> as your go-to tool.</p>
           </article>
         </section>
@@ -287,35 +261,27 @@ console.log(user.get('firstName'));</code>
           </header>
           <article>
             <p>To get the ball rollin' you first have to create an instance of Sequelize. Use it the following way:</p>
-            <!-- <pre> -->
               <code>const sequelize = new Sequelize('database', 'username', 'password', {
   dialect: 'mysql'
 });</code>
-            <!-- </pre> -->
             <p>This will save the passed database credentials and provide all further methods.</p>
             <p>Furthermore you can specify a non-default host/port:</p>
-            <!-- <pre> -->
               <code>const sequelize = new Sequelize('database', 'username', 'password', {
   dialect: 'mysql',
   host: "my.server.tld",
   port: 9821,
 })</code>
-            <!-- </pre> -->
             <p>If you just don't have a password:</p>
-            <!-- <pre> -->
               <code>const sequelize = new Sequelize({
   database: 'db_name',
   username: 'username',
   password: null,
   dialect: 'mysql'
 });</code>
-            <!-- </pre> -->
             <p>You can also use a connection string:</p>
-            <!-- <pre> -->
               <code>const sequelize = new Sequelize('mysql://user:pass@example.com:9821/db_name', {
   <span class="comment">// Look to the next section for possible options</span>
 })</code>
-            <!-- </pre> -->
           </article>
         </section>
         <section class="main-section" id="Options">
@@ -512,22 +478,6 @@ Post.findAll({
 <span class="comment">// SELECT * FROM post WHERE char_length(status) = 6;</span></code>
           </article>
         </section>
-        <!-- <section class="main-section" id="One_To_One_associations">
-          <header>
-            <h2>One To One associations</h2>
-          </header>
-          <article>
-            
-          </article>
-        </section>
-        <section class="main-section" id="One_To_Many_associations">
-          <header>
-            <h2>One To Many associations</h2>
-          </header>
-          <article>
-            
-          </article>
-        </section> -->
       </main>
   	</div>
   </body>
