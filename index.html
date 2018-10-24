@@ -100,6 +100,13 @@
               </div>
             </a>
           </li>
+          <li>
+            <a class="nav-link" href="#Note_about_content">
+              <div class="link-item">
+                <p>Note about content</p>
+              </div>
+            </a>
+          </li>
         </ul>
       </nav>
       <main id="main-doc">
@@ -232,10 +239,10 @@ User.sync({force: true}).then(() => {
             <h2>Promises</h2>
           </header>
           <article>
-            <p>Sequelize uses <a href="bluebirdjs.com">Bluebird</a> promises to control async control-flow.</p>
+            <p>Sequelize uses <a href="http://bluebirdjs.com/docs/getting-started.html" target="_blank">Bluebird</a> promises to control async control-flow.</p>
             <ul>
               <li>
-                <p>If you are unfamiliar with how promises work, don't worry, you can read up on them <a href="http://bluebirdjs.com/docs/why-promises.html">here</a>.</p>
+                <p>If you are unfamiliar with how promises work, don't worry, you can read up on them <a href="http://bluebirdjs.com/docs/why-promises.html" target="_blank">here</a>.</p>
               </li>
             </ul>
             <ul>
@@ -252,7 +259,7 @@ console.log(user.get('firstName'));</code>
               <code>User.findOne().then(user => {
   console.log(user.get('firstName'));
 });</code>
-            <p>Once you've got the hang of what promises are and how they work, use the <a href="http://bluebirdjs.com/docs/api-reference.html">bluebird API reference</a> as your go-to tool.</p>
+            <p>Once you've got the hang of what promises are and how they work, use the <a href="http://bluebirdjs.com/docs/api-reference.html" target="_blank">bluebird API reference</a> as your go-to tool.</p>
           </article>
         </section>
         <section class="main-section" id="Basic_usage">
@@ -291,9 +298,9 @@ console.log(user.get('firstName'));</code>
           <article>
             <p>Besides the host and the port, Sequelize comes with a whole bunch of options. Here they are:</p>
             <ul>
-              <li>See <a href="http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html">Sequelize API</a></li>
-              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#configuration">Model Definition</a></li>
-              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/transactions.html">Transactions</a></li>
+              <li>See <a href="http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html" target="_blank">Sequelize API</a></li>
+              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/models-definition.html#configuration" target="_blank">Model Definition</a></li>
+              <li>See <a href="http://docs.sequelizejs.com/manual/tutorial/transactions.html" target="_blank">Transactions</a></li>
             </ul>
             <code>const sequelize = new Sequelize('database', 'username', 'password', {
   <span class="comment">// the sql dialect of the database</span>
@@ -476,6 +483,14 @@ Post.findAll({
   where: sequelize.where(sequelize.fn('char_length', sequelize.col('status')), 6)
 });
 <span class="comment">// SELECT * FROM post WHERE char_length(status) = 6;</span></code>
+          </article>
+        </section>
+        <section class="main-section" id="Note_about_content">
+          <header>
+            <h2>Note about content</h2>
+          </header>
+          <article class="note">
+            This page was coded by johnno8, but the content (text and code samples) was taken from <a href="http://docs.sequelizejs.com/" target="_blank">here</a>.
           </article>
         </section>
       </main>
