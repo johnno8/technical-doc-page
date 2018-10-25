@@ -1,0 +1,378 @@
+/* @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+body::-webkit-scrollbar { 
+    display: none; 
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "nav"
+    "main";
+}
+
+nav {
+  width: 100%;
+  height: 200px;
+  grid-area: nav;
+  display: grid;
+  grid-template-rows: auto auto;
+  font-weight: bold;
+
+  position: fixed;
+  z-index: 2;
+
+  background-color: white;
+}
+
+nav header {
+  height: auto;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-bottom: solid 1px #ddd;
+  color: #555;
+  position: relative;
+}
+
+#header-img {
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+
+nav header h3 {
+  font-size: 1.35em;
+}
+
+nav ul {
+  list-style: none;
+  overflow: auto;
+  margin-top: 0;
+}
+
+nav li {
+}
+
+.link-item {
+  height: 40px;
+  width: 95%;
+  background: #6eb5f7;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.1em;
+}
+
+.link-item p {
+  line-height: 40px;
+}
+
+a,
+a:visited,
+a:active{
+  text-decoration: none;
+  color: white;
+}
+
+main {
+  width: 100%;
+  height: 100%;
+  grid-area: main;
+  overflow: auto;
+  border-top: solid 1px #ddd;
+  border-left: solid 1px #ddd;
+}
+
+.main-section {
+  margin: 1.5em auto;
+  color: #555;
+}
+
+.main-section header, article {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.main-section header {
+  position: relative;
+  height: 40px;
+}
+
+.main-section header a {
+  position: absolute;
+  left: 0px;
+  top: -200px;
+}
+
+.main-section header h2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+}
+
+.main-section article a {
+  color: #039BE5;
+  text-decoration: none;
+}
+
+#Introduction {
+  margin-top: 200px;
+}
+
+code {
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  display: block;
+  border-radius: 3px;
+  padding: 10px;
+  color: #4d4d4c;
+  white-space: pre;
+}
+
+.comment {
+  color: #8e908c;
+}
+
+.inline-code {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  padding: 0.2em 0.5em;
+  color: #262626;
+  font-size: 0.9em;
+}
+
+pre {
+  margin: 0;
+}
+
+@media (min-width: 769px) {
+  .container {
+    grid-template-columns: 25% 75%;
+    grid-template-areas: 
+      "nav main";
+  }
+
+  nav {
+    height: 100%;
+    width: 25%;
+    position: fixed;
+  }
+
+  #header-img {
+    left: 10px;
+  }
+
+  main {
+    border-top: 0px;
+  }
+
+  .main-section header a {
+    top: 0px;
+  }
+
+  #Introduction {
+    margin-top: 0;
+  }
+} */
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+body::-webkit-scrollbar { 
+    display: none; 
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  /*grid-template-rows: 200px auto;*/
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "nav"
+    "main";
+}
+
+nav {
+  width: 100%;
+  height: 200px;
+  grid-area: nav;
+  display: grid;
+  grid-template-rows: auto auto;
+  font-weight: bold;
+  position: fixed;
+  z-index: 2;
+  background-color: white;
+  border-bottom: solid 1px #ddd;
+}
+
+nav header {
+  height: auto;
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-bottom: solid 1px #ddd;
+  color: #555;
+  position: relative;
+}
+
+#header-img {
+  height: 40px;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+
+nav header h3 {
+  font-size: 1.35em;
+}
+
+nav ul {
+  list-style: none;
+  overflow: auto;
+  margin-top: 0;
+}
+
+nav li {
+}
+
+.link-item {
+  height: 40px;
+  width: 95%;
+  background: #6eb5f7;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.1em;
+}
+
+.link-item p {
+  line-height: 40px;
+}
+
+a,
+a:visited,
+a:active{
+  text-decoration: none;
+  color: white;
+}
+
+/*::-webkit-scrollbar { 
+    display: none; 
+}*/
+
+main {
+  width: 100%;
+  height: 100%;
+  grid-area: main;
+  overflow: auto;
+  border-left: solid 1px #ddd;
+}
+
+.main-section {
+  margin: 1.5em auto;
+  color: #555;
+}
+
+.main-section header, article {
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.main-section header {
+  position: relative;
+  height: 30px;
+}
+
+.main-section header a {
+  position: absolute;
+  left: 0px;
+  top: -200px;
+}
+
+.main-section header h2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin-top: 8px;
+}
+
+.main-section article a {
+  color: #039BE5;
+  text-decoration: none;
+}
+
+#Introduction {
+  margin-top: 200px;
+}
+
+code {
+  line-height: 1.6;
+  background-color: #f5f5f5;
+  display: block;
+  border-radius: 3px;
+  padding: 10px;
+  color: #4d4d4c;
+  white-space: pre;
+}
+
+.comment {
+  color: #8e908c;
+}
+
+.inline-code {
+  background-color: #f5f5f5;
+  border-radius: 3px;
+  padding: 0.2em 0.5em;
+  color: #262626;
+  font-size: 0.9em;
+}
+
+pre {
+  margin: 0;
+}
+
+@media (min-width: 769px) {
+  .container {
+    grid-template-columns: 25% 75%;
+    grid-template-areas: 
+      "nav main";
+  }
+
+  nav {
+    height: 100%;
+    width: 25%;
+    position: fixed;
+  }
+
+  #header-img {
+    left: 10px;
+  }
+
+  main {
+    border-top: 0px;
+  }
+
+  .main-section header a {
+    top: 0px;
+  }
+
+  #Introduction {
+    margin-top: 0;
+  }
+}
