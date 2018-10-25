@@ -17,84 +17,84 @@
         </header>
         <ul>
           <li>
-            <a class="nav-link" href="#Introduction">
+            <a class="nav-link" href="#intro-target">
               <div class="link-item">
                 <p>Introduction</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Installation">
+            <a class="nav-link" href="#install-target">
               <div class="link-item">
                 <p>Installation</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Setting_up_a_connection">
+            <a class="nav-link" href="#set-up-conn-target">
               <div class="link-item">
-                <p>Setting up a connection</p>
+                <p>Set up a connection</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Test_the_connection">
+            <a class="nav-link" href="#test-connection-target">
               <div class="link-item">
                 <p>Test the connection</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Your_first_model">
+            <a class="nav-link" href="#first-model-target">
               <div class="link-item">
                 <p>Your first model</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Your_first_query">
+            <a class="nav-link" href="#first-query-target">
               <div class="link-item">
                 <p>Your first query</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Promises">
+            <a class="nav-link" href="#promises-target">
               <div class="link-item">
                 <p>Promises</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Basic_usage">
+            <a class="nav-link" href="#basic-target">
               <div class="link-item">
                 <p>Basic usage</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Options">
+            <a class="nav-link" href="#options-target">
               <div class="link-item">
                 <p>Options</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Model_definition">
+            <a class="nav-link" href="#model-def-target">
               <div class="link-item">
                 <p>Model definition</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Data_retrieval">
+            <a class="nav-link" href="#data-target">
               <div class="link-item">
                 <p>Data retrieval</p>
               </div>
             </a>
           </li>
           <li>
-            <a class="nav-link" href="#Querying">
+            <a class="nav-link" href="#querying-target">
               <div class="link-item">
                 <p>Querying</p>
               </div>
@@ -112,6 +112,7 @@
       <main id="main-doc">
         <section class="main-section" id="Introduction">
           <header>
+            <a name="intro-target">&nbsp;</a>
             <h2>Introduction</h2>
           </header>
           <article>
@@ -130,7 +131,8 @@
           </article>
         </section>
         <section class="main-section" id="Installation">
-          <header>
+          <header> 
+            <a name="install-target">&nbsp;</a>
             <h2>Installation</h2>
           </header>
           <article>
@@ -154,9 +156,10 @@ $ yarn add sqlite3
 $ yarn add tedious <span class="comment">// MSSQL</code></span>
           </article>
         </section>
-        <section class="main-section" id="Setting_up_a_connection">
+        <section class="main-section" id="Set_up_a_connection">
           <header>
-            <h2>Setting up a connection</h2>
+            <a name="set-up-conn-target">&nbsp;</a>
+            <h2>Set up a connection</h2>
           </header>
           <article>
             <p>Sequelize will setup a connection pool on initialization so you should ideally only ever create one instance per database if you're connecting to the DB from a single process. If you're connecting to the DB from multiple processes, you'll have to create one instance per process, but each instance should have a maximum connection pool size of "max connection pool size divided by number of instances". So, if you wanted a max connection pool size of 90 and you had 3 worker processes, each process's instance should have a max connection pool size of 30.</p>
@@ -184,6 +187,7 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
         </section>
         <section class="main-section" id="Test_the_connection">
           <header>
+            <a name="test-connection-target">&nbsp;</a>
             <h2>Test the connection</h2>
           </header>
           <article>
@@ -199,9 +203,10 @@ const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
           </article>
         </section>
         <section class="main-section" id="Your_first_model">
-          <header>
-            <h2>Your first model</h2>
-          </header>
+            <header>
+              <a name="first-model-target">&nbsp;</a>
+              <h2>Your first model</h2>
+            </header>
           <article>
             <p>Models are defined with <span class="inline-code">sequelize.define('name', {attributes}, {options})</span>.</p>
               <code>const User = sequelize.define('user', {
@@ -225,6 +230,7 @@ User.sync({force: true}).then(() => {
         </section>
         <section class="main-section" id="Your_first_query">
           <header>
+            <a name="first-query-target">&nbsp;</a>
             <h2>Your first query</h2>
           </header>
           <article>
@@ -236,6 +242,7 @@ User.sync({force: true}).then(() => {
         </section>
         <section class="main-section" id="Promises">
           <header>
+            <a name="promises-target">&nbsp;</a>
             <h2>Promises</h2>
           </header>
           <article>
@@ -264,6 +271,7 @@ console.log(user.get('firstName'));</code>
         </section>
         <section class="main-section" id="Basic_usage">
           <header>
+            <a name="basic-target">&nbsp;</a>
             <h2>Basic usage</h2>
           </header>
           <article>
@@ -293,6 +301,7 @@ console.log(user.get('firstName'));</code>
         </section>
         <section class="main-section" id="Options">
           <header>
+            <a name="options-target">&nbsp;</a>
             <h2>Options</h2>
           </header>
           <article>
@@ -377,6 +386,7 @@ console.log(user.get('firstName'));</code>
         </section>
         <section class="main-section" id="Model_definition">
           <header>
+            <a name="model-def-target">&nbsp;</a>
             <h2>Model definition</h2>
           </header>
           <article>
@@ -395,6 +405,7 @@ const Task = sequelize.define('task', {
         </section>
         <section class="main-section" id="Data_retrieval">
           <header>
+            <a name="data-target">&nbsp;</a>
             <h2>Data retrieval</h2>
           </header>
           <article>
@@ -423,6 +434,7 @@ Project.findOne({
         </section>
         <section class="main-section" id="Querying">
           <header>
+            <a name="querying-target">&nbsp;</a>
             <h2>Querying</h2>
           </header>
           <article>

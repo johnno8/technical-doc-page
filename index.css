@@ -26,6 +26,11 @@ nav {
   display: grid;
   grid-template-rows: auto auto;
   font-weight: bold;
+
+  position: fixed;
+  z-index: 2;
+
+  background-color: white;
 }
 
 nav header {
@@ -103,9 +108,31 @@ main {
   margin-right: 3%;
 }
 
-.main-section a {
+.main-section header {
+  position: relative;
+  height: 40px;
+}
+
+.main-section header a {
+  position: absolute;
+  left: 0px;
+  top: -200px;
+}
+
+.main-section header h2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  margin: 0;
+}
+
+.main-section article a {
   color: #039BE5;
   text-decoration: none;
+}
+
+#Introduction {
+  margin-top: 200px;
 }
 
 code {
@@ -153,5 +180,13 @@ pre {
 
   main {
     border-top: 0px;
+  }
+
+  .main-section header a {
+    top: 0px;
+  }
+
+  #Introduction {
+    margin-top: 0;
   }
 }
