@@ -310,6 +310,12 @@ main {
   left: 0px;
   top: 0px;
   margin-top: 8px;
+  border-bottom: solid 1px #ddd; 
+  width: 100%;  
+}
+
+.main-section article {
+  padding-top: 8px;
 }
 
 .main-section article a {
